@@ -1,235 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.1/css/boxicons.min.css">
+    <style>
+        .no-data-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .icon-hover-circle:hover {
+            cursor: pointer;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
 <?php include('partials/_header.php') ?>
 <?php include('partials/_sidebar.php') ?>
 <input type="hidden" value="11" id="checkFileName">
-<!-- End of Sidebar -->
 
-<!-- Main Content -->
 <div class="content">
-    <!-- Navbar -->
     <?php include("partials/_navbar.php"); ?>
 
-    <!-- End of Navbar -->
-
-    <main>
-        <div class="header">
-            <div class="left">
-                <h1>Bus service</h1>
-                <ul class="breadcrumb">
-                    <li><a href="#">
-                        </a></li>
-                </ul>
-            
-            <div class="d-flex mx-3 mb-3" style="grid-gap: 10px; flex-wrap: wrap;">
-            <button type="button" class="btn btn-primary" id="bus-request" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fas fa-bus"></i> Bus Requests
+    <main class="p-4">
+        <div class="mb-4">
+            <h1>Bus Service</h1>
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fas fa-bus"></i> Bus Requests
                 </button>
-
-                <button type="button" class="btn btn-success" id="bus-request" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                <i class="fas fa-bus"></i> Accepted Requests
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <i class="fas fa-bus"></i> Accepted Requests
                 </button>
-            </div>
-
+                     <!-- Button -->
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#mapModal">
+                    <i ></> 📍School Location
+                </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Request for bus</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title" id="mapModalLabel">School Location</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body" id="request">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal 2 -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Requests Accepted by Admin</h1>
-        
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="form-outline" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" data-mdb-input-init>
-  <input type="search" id="search" class="form-control" placeholder="Search From Name or id " aria-label="Search" />
-</div>
-      <div class="modal-body" id="request-accept">
-          
-          
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         </div>
-    </div>
-  </div>
-</div>
-
-
-            </div>
-
+      <div class="modal-body">
+        <div style="width: 100%; height: 400px;">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.255328924236!2d77.06516!3d28.514535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19657bc1ffbf%3A0x105c16c01c337de9!2sModern%20Perfect%20Public%20School!5e0!3m2!1sen!2sin!4v1714825395221"
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
-
-
-
-
-        <div class="container display-buses-card">
-            <div class="row g-4 bus-card-row">
-
-                <div class="col col-lg-5 col-md-6 col-sm-12 mb-30">
-                    <div class="card" style="border-radius: 10px;">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title mb-4 d-flex align-items-center">
-                                    <i class='bx bxs-bus me-1'></i>
-                                    Buses
-                                </h5>
-                                <span id="open-add-bus-dailog"><i class='bx bx-plus icon-hover-circle'></i></span>
-                            </div>
-
-                            <div class="px-1">
-                                <div class="accordion accordion-flush" id="accordion-bus-list">
-                                 
-                                </div>
-                            </div>
-                            <div class="dataNotAvailable" id="No-Buses">
-
-                                <div class="_flex-container box-hide">
-
-                                    <div class="no-data-box">
-                                        <div class="no-dataicon">
-                                            <i class='bx bxs-bus'></i>
-                                        </div>
-                                        <p>No Buses</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+        </div>
+    
+        <!-- Bus Request Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Request for Bus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="request"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col col-lg-7 col-md-6 col-sm-12 mb-30">
-                    <div class="card" style="border-radius: 10px;">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title mb-4 d-flex align-items-center" id="busRootHeading">
-                                    <i class='bx bxs-map me-1'></i>
-                                    Bus Root
-                                </h5>
-                            </div>
-                            
-                            <?php include("partials/bus-shared/bus-root-gui.php"); ?>
+        <!-- Accepted Request Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Requests Accepted by Admin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="p-3">
+                        <input type="search" id="search" class="form-control mb-3" placeholder="Search by name or ID">
+                        <div id="request-accept"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <div class="dataNotAvailable" id="No-Bus-selected">
-
-                                <div class="_flex-container box-hide">
-
-                                    <div class="no-data-box">
-                                        <div class="no-dataicon">
-                                            <i class='bx bxs-bus-school'></i>
-                                        </div>
-                                        <p>No Bus Root</p>
-                                    </div>
-                                </div>
+        <!-- Bus and Route Display -->
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5><i class='bx bxs-bus me-2'></i>Buses</h5>
+                            <span id="open-add-bus-dailog" class="icon-hover-circle"><i class='bx bx-plus'></i></span>
+                        </div>
+                        <div id="accordion-bus-list" class="accordion accordion-flush"></div>
+                        <div id="No-Buses" class="dataNotAvailable text-center mt-3">
+                            <div class="no-data-box">
+                                <i class='bx bxs-bus fs-1'></i>
+                                <p>No Buses</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="mb-3"><i class='bx bxs-map me-2'></i>Bus Route</h5>
+                        <?php include("partials/bus-shared/bus-root-gui.php"); ?>
+                        <div id="No-Bus-selected" class="dataNotAvailable text-center mt-3">
+                            <div class="no-data-box">
+                                <i class='bx bxs-bus-school fs-1'></i>
+                                <p>No Bus Route</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <br><br>
-    </main>
-</div>
 
-<script type="text/javascript">
-   $(document).ready(function(){
-    $.ajax({
-        url: "partials/bus-requests.php",
-        method: "post",
-        success: function(data){
-            $("#request").html(data);
-        }
-    });
-    $.ajax({
-        url: "partials/load-bus.php",
-        method: "post",
-        success: function(data){
-            $("#request-accept").html(data);
-        }
-    });
-});
+        <div class="mt-5">
 
-   
-   document.getElementById("search").addEventListener("keyup", function() {
-    var val = this.value; // Retrieve the value of the input field
+      
 
-    // Create a FormData object to send data to the server
-    var formData = new FormData();
-    formData.append("val", val);
-
-    // Make a fetch request
-    fetch("partials/search-bus.php", {
-        method: "POST",
-        body: formData // Set the body of the request to the FormData object
-    })
-    .then(response => response.text()) // Parse the response as text
-    .then(data => {
-        // Update the content of the element with the id "request-accept"
-        document.getElementById("request-accept").innerHTML = data;
-    })
-    .catch(error => {
-        console.error("Error:", error); // Log any errors to the console
-    });
-});
- 
-</script>
+<?php include('partials/_footer.php'); ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/bus.js"></script>
 <script src="js/date-picker.min.js"></script>
 <script>
-    const newArrival = new DatePicker({
+    $(document).ready(function(){
+        $.post("partials/bus-requests.php", function(data){
+            $("#request").html(data);
+        });
+        $.post("partials/load-bus.php", function(data){
+            $("#request-accept").html(data);
+        });
+
+        document.getElementById("search").addEventListener("keyup", function() {
+            var val = this.value;
+            var formData = new FormData();
+            formData.append("val", val);
+            fetch("partials/search-bus.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("request-accept").innerHTML = data;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+
+    new DatePicker({
         el: '#arrival-time-new-picker',
         toggleEl: '#new-arrival-toggler',
         inputEl: '#arrival-time-new',
         type: 'HOUR'
     });
 
-    const editArrival = new DatePicker({
+    new DatePicker({
         el: '#arrival-time-edit-picker',
         toggleEl: '#edit-arrival-toggler',
         inputEl: '#arrival-time-edit',
         type: 'HOUR'
     });
 </script>
-<?php include('partials/_footer.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-   <map name=""> <H2>SCHOOL LOCATION</H2></map>
-<div id="map">
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14598.53180364763!2d80.1056086!3d26.1527202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c57a948d70dcd%3A0x91f52997c943df54!2sPandit%20Guru%20Prasad%20Gaya%20Prasad%20Inter%20College!5e0!3m2!1sen!2sin!4v1648226514762!5m2!1sen!2sin"
-      width="100%"
-      height="50%"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </div>
-
-
 </body>
 </html>
